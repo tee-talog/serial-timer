@@ -6,6 +6,9 @@ import {
 } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 
+// @ts-ignore
+import css from "../index.css?url";
+
 export const Route = createRootRoute({
   head: () => ({
     meta: [
@@ -20,6 +23,7 @@ export const Route = createRootRoute({
         title: "TanStack Start Starter",
       },
     ],
+    links: [{ rel: "stylesheet", href: css }],
   }),
   component: RootComponent,
 });
@@ -38,6 +42,7 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
       <head>
         <HeadContent />
       </head>
+
       <body>
         {children}
         <Scripts />

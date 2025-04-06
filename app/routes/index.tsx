@@ -1,78 +1,172 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { type Timer, useRenTimer } from "../hooks/useTimer";
+import type { FC } from "react";
 
-const IntervalList = () => {
+// セットしているタイマーのリスト
+const IntervalList: FC<{ timers: Timer[]; index: number | null }> = ({
+  timers,
+  index,
+}) => {
+  if (index === null) {
+    return null;
+  }
+
   return (
     <div>
-      <span>1/2</span>
+      <span>
+        {index + 1}/{timers.length}
+      </span>
+
       <ol>
-        <li>2:00</li>
-        <li>3:00</li>
+        {timers.map((t, i) => (
+          <li key={t.id}>
+            {t.time}
+            {i === index && "←ｲﾏｺｺ"}
+          </li>
+        ))}
       </ol>
     </div>
   );
 };
 
-const TotalTimes = () => {
+// 合計時間
+const TotalTimes: FC<{ timeSum: number; remainTime: number }> = ({
+  timeSum,
+  remainTime,
+}) => {
+  // TODO
+  const formattedRemainTime = `${remainTime}`;
+  // TODO
+  const remainTimeDuration = formattedRemainTime;
+
+  // 経過時間
+  const elapsedTime = timeSum - remainTime;
+  // TODO
+  const formattedElapsedTime = `${elapsedTime}`;
+  // TODO
+  const elapsedTimeDuration = formattedElapsedTime;
+
   return (
     <table>
-      <tr>
-        <td>合計経過時間</td>
-        <td>
-          <time dateTime="PT10M">10:00</time>
-        </td>
-      </tr>
+      <tbody>
+        <tr>
+          <td>合計経過時間</td>
+          <td>
+            <time dateTime={elapsedTimeDuration}>{formattedElapsedTime}</time>
+          </td>
+        </tr>
 
-      <tr>
-        <td>合計残り時間</td>
-        <td>
-          <time dateTime="PT15M">15:00</time>
-        </td>
-      </tr>
+        <tr>
+          <td>合計残り時間</td>
+          <td>
+            <time dateTime={remainTimeDuration}>{formattedRemainTime}</time>
+          </td>
+        </tr>
+      </tbody>
     </table>
   );
 };
 
-const IndividualTimes = () => {
+const IndividualTimes: FC<{
+  currentTime: number | null;
+  currentRemainTime: number | null;
+}> = ({ currentTime, currentRemainTime }) => {
+  if (currentTime === null || currentRemainTime === null) {
+    return null;
+  }
+
+  // TODO
+  const formattedCurrentRemainTime = `${currentRemainTime}`;
+  // TODO
+  const currentRemainTimeDuration = formattedCurrentRemainTime;
+
+  // 現在のタイマーの経過時間
+  const currentElapsedTime = currentTime - currentRemainTime;
+  // TODO
+  const formattedCurrentElapsedTime = `${currentElapsedTime}`;
+  // TODO
+  const currentElapsedTimeDuration = formattedCurrentElapsedTime;
+
   return (
     <table>
-      <tr>
-        <td>現在のタイマーの経過時間</td>
-        <td>
-          <time dateTime="PT2M1S">2:01</time>
-        </td>
-      </tr>
+      <tbody>
+        <tr>
+          <td>現在のタイマーの経過時間</td>
+          <td>
+            <time dateTime={currentElapsedTimeDuration}>
+              {formattedCurrentElapsedTime}
+            </time>
+          </td>
+        </tr>
 
-      <tr>
-        <td>現在のタイマーの残り時間</td>
-        <td>
-          <time dateTime="PT2M1S">2:01</time>
-        </td>
-      </tr>
+        <tr>
+          <td>現在のタイマーの残り時間</td>
+          <td>
+            <time dateTime={currentRemainTimeDuration}>
+              {formattedCurrentRemainTime}
+            </time>
+          </td>
+        </tr>
+      </tbody>
     </table>
   );
 };
 
-const Actions = () => {
+const Actions: FC<{
+  onStart: () => void;
+  onPause: () => void;
+  onStop: () => void;
+}> = ({ onStart, onPause, onStop }) => {
   return (
     <div>
-      <button type="button">start</button>
-      <button type="button">pause</button>
-      <button type="button">stop</button>
+      <button type="button" onClick={onStart}>
+        start
+      </button>
+      <button type="button" onClick={onPause}>
+        pause
+      </button>
+      <button type="button" onClick={onStop}>
+        stop
+      </button>
     </div>
   );
 };
 
 const RouteComponent = () => {
+  const {
+    start,
+    addTimer,
+    index,
+    isFinished,
+    isStarted,
+    pause,
+    remainTime,
+    removeTimer,
+    reset,
+    timers,
+    timeSum,
+    currentTimer,
+    currentRemainTime,
+  } = useRenTimer();
+
+  const stop = () => {
+    pause();
+    reset();
+  };
+
   return (
     <div>
       <header>連タイマー</header>
 
       <main>
-        <TotalTimes />
-        <IndividualTimes />
-        <Actions />
+        <TotalTimes remainTime={remainTime} timeSum={timeSum} />
+        <IndividualTimes
+          currentRemainTime={currentRemainTime}
+          currentTime={currentTimer?.time ?? null}
+        />
+        <Actions onStart={start} onPause={pause} onStop={stop} />
 
-        <IntervalList />
+        <IntervalList index={index} timers={timers} />
       </main>
     </div>
   );

@@ -35,7 +35,7 @@ export const useRenTimer = () => {
 
   // タイマースタート
   const start = useCallback(() => {
-    if (isStarted) {
+    if (timerRef.current !== undefined) {
       return;
     }
 

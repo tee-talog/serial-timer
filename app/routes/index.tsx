@@ -149,6 +149,13 @@ const RouteComponent = () => {
     currentRemainTime,
   } = useRenTimer();
 
+  const onStart = () => {
+    if (timers.length === 0) {
+      return;
+    }
+    start();
+  };
+
   const stop = () => {
     pause();
     reset();
@@ -164,7 +171,7 @@ const RouteComponent = () => {
           currentRemainTime={currentRemainTime}
           currentTime={currentTimer?.time ?? null}
         />
-        <Actions onStart={start} onPause={pause} onStop={stop} />
+        <Actions onStart={onStart} onPause={pause} onStop={stop} />
 
         <IntervalList index={index} timers={timers} />
       </main>

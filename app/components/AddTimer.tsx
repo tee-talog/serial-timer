@@ -1,5 +1,6 @@
 import { type FC, useState } from "react";
 import { Button } from "./uis/Button";
+import { Input } from "./uis/Input";
 
 export const AddTimer: FC<{
   addTimer: (num: number) => void;
@@ -13,7 +14,7 @@ export const AddTimer: FC<{
         addTimer(num);
       }}
     >
-      <input
+      <Input
         type="number"
         value={num}
         onChange={(e) => setNum(Number(e.currentTarget.value))}

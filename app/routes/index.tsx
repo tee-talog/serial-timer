@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { type Timer, useRenTimer } from "../hooks/useTimer";
+import { type Timer, useRenTimer, type Uuid } from "../hooks/useTimer";
 import { useState, type FC } from "react";
 
 const AddTimer: FC<{
@@ -28,7 +28,8 @@ const AddTimer: FC<{
 const IntervalList: FC<{
   timers: Timer[];
   index: number | null;
-}> = ({ timers, index }) => {
+  onRemove: (id: Uuid) => void;
+}> = ({ timers, index, onRemove }) => {
   return (
     <div>
       <span>
@@ -40,6 +41,9 @@ const IntervalList: FC<{
         {timers.map((t, i) => (
           <li key={t.id}>
             {t.time}
+            <button type="button" onClick={() => onRemove(t.id)}>
+              remove
+            </button>
             {i === index && "←ｲﾏｺｺ"}
           </li>
         ))}
@@ -207,7 +211,7 @@ const RouteComponent = () => {
         <Actions onStart={onStart} onPause={pause} onStop={stop} />
 
         <AddTimer addTimer={addTimer} />
-        <IntervalList index={index} timers={timers} />
+        <IntervalList index={index} timers={timers} onRemove={removeTimer} />
       </main>
     </div>
   );

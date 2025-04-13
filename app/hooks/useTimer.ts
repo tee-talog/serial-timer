@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-type Uuid = `${string}-${string}-${string}-${string}-${string}`;
+export type Uuid = `${string}-${string}-${string}-${string}-${string}`;
 
 export type Timer = {
   time: number;

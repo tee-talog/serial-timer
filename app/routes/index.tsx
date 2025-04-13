@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useRenTimer } from "../hooks/useTimer";
 import { Actions } from "../components/Actions";
-import { AddTimer } from "../components/AddTimer";
+import { AddTime } from "../components/AddTime";
 import { IndividualTimes } from "../components/IndividualTimes";
 import { IntervalList } from "../components/IntervalList";
 import { TotalTimes } from "../components/TotalTimes";
@@ -28,7 +28,7 @@ const RouteComponent = () => {
     start();
   };
 
-  const stop = () => {
+  const onStop = () => {
     pause();
     reset();
   };
@@ -43,9 +43,9 @@ const RouteComponent = () => {
           currentRemainTime={currentRemainTime}
           currentTime={currentTimer?.time ?? null}
         />
-        <Actions onStart={onStart} onPause={pause} onStop={stop} />
+        <Actions onStart={onStart} onPause={pause} onStop={onStop} />
 
-        <AddTimer addTimer={addTimer} />
+        <AddTime addTimer={addTimer} />
         <IntervalList index={index} timers={timers} onRemove={removeTimer} />
       </main>
     </div>

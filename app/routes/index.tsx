@@ -1,20 +1,39 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { type Timer, useRenTimer } from "../hooks/useTimer";
-import type { FC } from "react";
+import { useState, type FC } from "react";
+
+const AddTimer: FC<{
+  addTimer: (num: number) => void;
+}> = ({ addTimer }) => {
+  const [num, setNum] = useState(0);
+
+  return (
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        addTimer(num);
+      }}
+    >
+      <input
+        type="number"
+        value={num}
+        onChange={(e) => setNum(Number(e.currentTarget.value))}
+      />
+      <button type="submit">add</button>
+    </form>
+  );
+};
 
 // セットしているタイマーのリスト
-const IntervalList: FC<{ timers: Timer[]; index: number | null }> = ({
-  timers,
-  index,
-}) => {
-  if (index === null) {
-    return null;
-  }
-
+const IntervalList: FC<{
+  timers: Timer[];
+  index: number | null;
+}> = ({ timers, index }) => {
   return (
     <div>
       <span>
-        {index + 1}/{timers.length}
+        {index !== null && `${index + 1}/`}
+        {timers.length}
       </span>
 
       <ol>
@@ -72,7 +91,21 @@ const IndividualTimes: FC<{
   currentRemainTime: number | null;
 }> = ({ currentTime, currentRemainTime }) => {
   if (currentTime === null || currentRemainTime === null) {
-    return null;
+    return (
+      <table>
+        <tbody>
+          <tr>
+            <td>現在のタイマーの経過時間</td>
+            <td>-</td>
+          </tr>
+
+          <tr>
+            <td>現在のタイマーの残り時間</td>
+            <td>-</td>
+          </tr>
+        </tbody>
+      </table>
+    );
   }
 
   // TODO
@@ -173,6 +206,7 @@ const RouteComponent = () => {
         />
         <Actions onStart={onStart} onPause={pause} onStop={stop} />
 
+        <AddTimer addTimer={addTimer} />
         <IntervalList index={index} timers={timers} />
       </main>
     </div>

@@ -31,7 +31,7 @@ export const useRenTimer = () => {
   const timerRef = useRef<number | undefined>(undefined);
 
   // 最初のタイマーが始まってからの時間
-  const [time, setTime] = useState(0);
+  const [time, setTime] = useState<number | null>(null);
 
   // タイマースタート
   const start = useCallback(() => {
@@ -39,8 +39,10 @@ export const useRenTimer = () => {
       return;
     }
 
+    setTime(0);
+
     timerRef.current = window.setInterval(() => {
-      setTime((t) => t + 1);
+      setTime((t) => (t ?? 0) + 1);
     }, 1000);
   }, []);
 
@@ -61,7 +63,7 @@ export const useRenTimer = () => {
   const isStarted = timerRef.current !== undefined;
 
   // 残りの時間
-  const remainTime = timeSum - time;
+  const remainTime = timeSum - (time ?? 0);
 
   // 一度スタートして終わっているか
   // isFinished === true なら isStarted === false
@@ -76,7 +78,7 @@ export const useRenTimer = () => {
 
   // 今どのタイマーが実行されているか
   const index = useMemo(() => {
-    if (!isStarted || isFinished) {
+    if (!isStarted || isFinished || time === null) {
       return null;
     }
 

@@ -1,4 +1,8 @@
 import type { FC } from "react";
+import { Table } from "./uis/Table";
+import { TBody } from "./uis/TBody";
+import { Td } from "./uis/Td";
+import { Tr } from "./uis/Tr";
 
 export const IndividualTimes: FC<{
   currentTime: number | null;
@@ -6,19 +10,19 @@ export const IndividualTimes: FC<{
 }> = ({ currentTime, currentRemainTime }) => {
   if (currentTime === null || currentRemainTime === null) {
     return (
-      <table>
-        <tbody>
-          <tr>
-            <td>現在のタイマーの経過時間</td>
-            <td>-</td>
-          </tr>
+      <Table>
+        <TBody>
+          <Tr>
+            <Td>現在のタイマーの経過時間</Td>
+            <Td>-</Td>
+          </Tr>
 
-          <tr>
-            <td>現在のタイマーの残り時間</td>
-            <td>-</td>
-          </tr>
-        </tbody>
-      </table>
+          <Tr>
+            <Td>現在のタイマーの残り時間</Td>
+            <Td>-</Td>
+          </Tr>
+        </TBody>
+      </Table>
     );
   }
 
@@ -35,26 +39,26 @@ export const IndividualTimes: FC<{
   const currentElapsedTimeDuration = formattedCurrentElapsedTime;
 
   return (
-    <table>
-      <tbody>
-        <tr>
-          <td>現在のタイマーの経過時間</td>
-          <td>
+    <Table>
+      <TBody>
+        <Tr>
+          <Td>現在のタイマーの経過時間</Td>
+          <Td>
             <time dateTime={currentElapsedTimeDuration}>
               {formattedCurrentElapsedTime}
             </time>
-          </td>
-        </tr>
+          </Td>
+        </Tr>
 
-        <tr>
-          <td>現在のタイマーの残り時間</td>
-          <td>
+        <Tr>
+          <Td>現在のタイマーの残り時間</Td>
+          <Td>
             <time dateTime={currentRemainTimeDuration}>
               {formattedCurrentRemainTime}
             </time>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+          </Td>
+        </Tr>
+      </TBody>
+    </Table>
   );
 };

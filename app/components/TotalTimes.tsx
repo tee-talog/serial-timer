@@ -1,4 +1,8 @@
 import type { FC } from "react";
+import { Table } from "./uis/Table";
+import { Td } from "./uis/Td";
+import { Tr } from "./uis/Tr";
+import { TBody } from "./uis/TBody";
 
 // 合計時間
 export const TotalTimes: FC<{ timeSum: number; remainTime: number }> = ({
@@ -18,22 +22,22 @@ export const TotalTimes: FC<{ timeSum: number; remainTime: number }> = ({
   const elapsedTimeDuration = formattedElapsedTime;
 
   return (
-    <table>
-      <tbody>
-        <tr>
-          <td>合計経過時間</td>
-          <td>
+    <Table>
+      <TBody>
+        <Tr>
+          <Td>合計経過時間</Td>
+          <Td>
             <time dateTime={elapsedTimeDuration}>{formattedElapsedTime}</time>
-          </td>
-        </tr>
+          </Td>
+        </Tr>
 
-        <tr>
-          <td>合計残り時間</td>
-          <td>
+        <Tr>
+          <Td>合計残り時間</Td>
+          <Td>
             <time dateTime={remainTimeDuration}>{formattedRemainTime}</time>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+          </Td>
+        </Tr>
+      </TBody>
+    </Table>
   );
 };

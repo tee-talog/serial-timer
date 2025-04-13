@@ -1,4 +1,5 @@
 import type { FC } from "react";
+import { Button } from "./uis/Button";
 
 export const Actions: FC<{
   onStart: () => void;
@@ -7,15 +8,15 @@ export const Actions: FC<{
 }> = ({ onStart, onPause, onStop }) => {
   return (
     <div>
-      <button type="button" onClick={onStart}>
+      <Button type="button" onClick={onStart}>
         start
-      </button>
-      <button type="button" onClick={onPause}>
+      </Button>
+      <Button type="button" onClick={onPause}>
         pause
-      </button>
-      <button type="button" onClick={onStop}>
+      </Button>
+      <Button type="button" onClick={onStop}>
         stop
-      </button>
+      </Button>
     </div>
   );
 };

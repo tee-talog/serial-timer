@@ -1,4 +1,5 @@
 import { type FC, useState } from "react";
+import { Button } from "./uis/Button";
 
 export const AddTimer: FC<{
   addTimer: (num: number) => void;
@@ -17,7 +18,7 @@ export const AddTimer: FC<{
         value={num}
         onChange={(e) => setNum(Number(e.currentTarget.value))}
       />
-      <button type="submit">add</button>
+      <Button type="submit">add</Button>
     </form>
   );
 };

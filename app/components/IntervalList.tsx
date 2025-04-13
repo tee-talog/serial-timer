@@ -1,5 +1,6 @@
 import type { FC } from "react";
 import type { Timer, Uuid } from "../hooks/useTimer";
+import { Button } from "./uis/Button";
 
 // セットしているタイマーのリスト
 export const IntervalList: FC<{
@@ -18,9 +19,9 @@ export const IntervalList: FC<{
         {timers.map((t, i) => (
           <li key={t.id}>
             {t.time}
-            <button type="button" onClick={() => onRemove(t.id)}>
+            <Button type="button" onClick={() => onRemove(t.id)}>
               remove
-            </button>
+            </Button>
             {i === index && "←ｲﾏｺｺ"}
           </li>
         ))}

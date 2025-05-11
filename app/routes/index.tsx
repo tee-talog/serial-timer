@@ -5,6 +5,7 @@ import { AddTime } from "../components/AddTime";
 import { IndividualTimes } from "../components/IndividualTimes";
 import { IntervalList } from "../components/IntervalList";
 import { TotalTimes } from "../components/TotalTimes";
+import { Header } from "../components/uis/Header";
 
 const RouteComponent = () => {
   const {
@@ -35,7 +36,7 @@ const RouteComponent = () => {
 
   return (
     <div>
-      <header>連タイマー</header>
+      <Header>連タイマー</Header>
 
       <main>
         <TotalTimes remainTime={remainTime} timeSum={timeSum} />

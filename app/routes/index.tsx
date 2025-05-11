@@ -6,6 +6,7 @@ import { IndividualTimes } from "../components/IndividualTimes";
 import { IntervalList } from "../components/IntervalList";
 import { TotalTimes } from "../components/TotalTimes";
 import { Header } from "../components/uis/Header";
+import { AppLayout } from "../components/layouts/AppLayout";
 
 const RouteComponent = () => {
   const {
@@ -35,7 +36,7 @@ const RouteComponent = () => {
   };
 
   return (
-    <div>
+    <AppLayout>
       <Header>連タイマー</Header>
 
       <main>
@@ -49,7 +50,7 @@ const RouteComponent = () => {
         <AddTime addTimer={addTimer} />
         <IntervalList index={index} timers={timers} onRemove={removeTimer} />
       </main>
-    </div>
+    </AppLayout>
   );
 };
 

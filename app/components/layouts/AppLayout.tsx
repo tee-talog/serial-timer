@@ -7,8 +7,9 @@ export const AppLayout: FC<Props> = ({ className, ...props }) => {
   const styleGrid = [
     "grid",
     "grid-rows-[60px_1fr]",
-    // https://coliss.com/articles/build-websites/operation/css/how-to-use-css-minmax.html
-    "grid-cols-[minmax(1rem,1fr)_minmax(auto,800px)_minmax(1rem,1fr)]",
+    "gap-y-4",
+    "grid-cols-[1fr_minmax(auto,800px)_1fr]",
+    "gap-x-2",
   ];
 
   const cn = clsx(className, ...styleGrid);

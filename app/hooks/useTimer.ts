@@ -104,7 +104,7 @@ export const useRenTimer = () => {
 
   // 今のタイマーがどれくらい残っているか
   const currentRemainTime = useMemo(() => {
-    if (!isStarted || isFinished || !currentTimer) {
+    if (!isStarted || isFinished || !currentTimer || time === null) {
       return null;
     }
 
@@ -113,13 +113,15 @@ export const useRenTimer = () => {
     for (let i = 0; i < timers.length; i++) {
       const t = timers[i];
       if (t.id === currentTimer.id) {
-        return sum;
+        // このタイマーまでの時間から最初からの時間を引く
+        return sum + currentTimer.time - time;
       }
       sum += t.time;
     }
+
     // 来ることはない
     return null;
-  }, [isStarted, isFinished, currentTimer, timers]);
+  }, [isStarted, isFinished, currentTimer, timers, time]);
 
   return {
     addTimer,

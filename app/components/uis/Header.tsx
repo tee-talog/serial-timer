@@ -1,10 +1,10 @@
 import clsx from "clsx";
 import type { ComponentProps, FC } from "react";
 
-type Props = ComponentProps<"header">;
+type Props = ComponentProps<"div">;
 
 export const Header: FC<Props> = ({ className, ...props }) => {
-  const cn = clsx(className, "col-start-1", "col-end-4");
+  const cn = clsx(className);
 
-  return <header className={cn} {...props} />;
+  return <div className={cn} {...props} />;
 };

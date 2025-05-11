@@ -8,6 +8,7 @@ import { TotalTimes } from "../components/TotalTimes";
 import { Header } from "../components/uis/Header";
 import { AppLayout } from "../components/layouts/AppLayout";
 import { PageLayout } from "../components/layouts/PageLayout";
+import { HeaderLayout } from "../components/layouts/HeaderLayout";
 
 const RouteComponent = () => {
   const {
@@ -38,7 +39,9 @@ const RouteComponent = () => {
 
   return (
     <AppLayout>
-      <Header>連タイマー</Header>
+      <HeaderLayout>
+        <Header>連タイマー</Header>
+      </HeaderLayout>
 
       <PageLayout>
         <TotalTimes remainTime={remainTime} timeSum={timeSum} />

@@ -37,6 +37,7 @@ const RouteComponent = () => {
     reset();
   };
 
+  // index.tsx に対して別ファイルの Layout を設定できない？
   return (
     <AppLayout>
       <HeaderLayout>

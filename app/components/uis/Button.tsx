@@ -6,9 +6,9 @@ type Props = ComponentProps<"button">;
 export const Button: FC<Props> = ({ className, ...props }) => {
   const style = clsx(
     className,
-    "min-h-[2em]",
     "w-max",
     "px-3",
+    "py-1",
     "border-2",
     "border-slate-500",
     "rounded-[0.25em]",

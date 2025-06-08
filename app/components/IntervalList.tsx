@@ -46,31 +46,37 @@ export const IntervalList: FC<{
 
   return (
     <div className="self-stretch">
-      <span>
-        {index !== null && `${index + 1}/`}
-        {timers.length}
-      </span>
+      <h2>登録されたタイマー</h2>
+      {timers.length === 0 ? (
+        <div>ありません</div>
+      ) : (
+        <>
+          <span>
+            {index !== null && `${index + 1}/`}
+            {timers.length}
+          </span>
 
-      <div className={listWrapperStyle}>
-        {/* TODO ヘッダーを追加する */}
-        <ol className={listStyle}>
-          {timers.map((t, i) => (
-            <li key={t.id} className={listRowStyle}>
-              {/* TODO 時分秒表記にする */}
-              <div className={timeCellStyle}>{t.time} 秒</div>
-              <div className={clsx("flex", "justify-end", "items-center")}>
-                {i === index && "ｲﾏｺｺ!"}
-              </div>
-              <div className={actionCellStyle}>
-                {/* TODO アイコンボタンにする */}
-                <Button type="button" onClick={() => onRemove(t.id)}>
-                  remove
-                </Button>
-              </div>
-            </li>
-          ))}
-        </ol>
-      </div>
+          <div className={listWrapperStyle}>
+            <ol className={listStyle}>
+              {timers.map((t, i) => (
+                <li key={t.id} className={listRowStyle}>
+                  {/* TODO 時分秒表記にする */}
+                  <div className={timeCellStyle}>{t.time} 秒</div>
+                  <div className={clsx("flex", "justify-end", "items-center")}>
+                    {i === index && "ｲﾏｺｺ!"}
+                  </div>
+                  <div className={actionCellStyle}>
+                    {/* TODO アイコンボタンにする */}
+                    <Button type="button" onClick={() => onRemove(t.id)}>
+                      remove
+                    </Button>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </>
+      )}
     </div>
   );
 };

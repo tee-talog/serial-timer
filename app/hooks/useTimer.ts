@@ -28,37 +28,39 @@ export const useRenTimer = () => {
   const timeSum = timers.reduce((acc, current) => acc + current.time, 0);
 
   // タイマー本体
-  const timerRef = useRef<number | undefined>(undefined);
+  const [timerId, setTimerId] = useState<number | undefined>(undefined);
 
   // 最初のタイマーが始まってからの時間
   const [time, setTime] = useState<number | null>(null);
 
   // タイマースタート
   const start = useCallback(() => {
-    if (timerRef.current !== undefined) {
+    if (timerId !== undefined) {
       return;
     }
 
-    timerRef.current = window.setInterval(() => {
-      setTime((t) => (t ?? 0) + 1);
-    }, 1000);
-  }, []);
+    setTimerId(
+      window.setInterval(() => {
+        setTime((t) => (t ?? 0) + 1);
+      }, 1000),
+    );
+  }, [timerId]);
 
   // タイマーを止める
   const pause = useCallback(() => {
-    window.clearInterval(timerRef.current);
-    timerRef.current = undefined;
-  }, []);
+    window.clearInterval(timerId);
+    setTimerId(undefined);
+  }, [timerId]);
 
   // タイマーを完全にリセットする
   const reset = useCallback(() => {
-    window.clearInterval(timerRef.current);
-    timerRef.current = undefined;
+    window.clearInterval(timerId);
+    setTimerId(undefined);
     setTime(0);
-  }, []);
+  }, [timerId]);
 
   // 開始しているか
-  const isStarted = timerRef.current !== undefined;
+  const isStarted = timerId !== undefined;
 
   // 残りの時間
   const remainTime = timeSum - (time ?? 0);

@@ -11,7 +11,7 @@ export const PageLayout: FC<Props> = ({ className, ...props }) => {
     "flex",
     "flex-col",
     "items-start",
-    "gap-y-4",
+    "gap-y-[32px]",
   );
 
   return <main className={cn} {...props} />;

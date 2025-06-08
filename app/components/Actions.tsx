@@ -7,18 +7,24 @@ export const Actions: FC<{
   onPause: () => void;
   onStop: () => void;
 }> = ({ onStart, onPause, onStop }) => {
-  const divStyle = clsx("flex", "gap-x-4");
+  const styleWrapper = clsx(
+    "flex",
+    "gap-x-8",
+    "w-full",
+    "py-2",
+    "justify-center",
+  );
 
   return (
-    <div className={divStyle}>
-      <Button type="button" onClick={onStart}>
-        start
+    <div className={styleWrapper}>
+      <Button type="button" size="big" onClick={onStart}>
+        スタート
       </Button>
-      <Button type="button" onClick={onPause}>
-        pause
+      <Button type="button" size="big" onClick={onPause}>
+        停止
       </Button>
-      <Button type="button" onClick={onStop}>
-        stop
+      <Button type="button" size="big" onClick={onStop}>
+        最初から
       </Button>
     </div>
   );

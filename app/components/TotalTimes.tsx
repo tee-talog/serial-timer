@@ -4,6 +4,7 @@ import { Td } from "./uis/Td";
 import { Tr } from "./uis/Tr";
 import { TBody } from "./uis/TBody";
 import clsx from "clsx";
+import { Card } from "./uis/Card";
 
 // 合計時間
 export const TotalTimes: FC<{ timeSum: number; remainTime: number }> = ({
@@ -22,7 +23,7 @@ export const TotalTimes: FC<{ timeSum: number; remainTime: number }> = ({
   // TODO
   const elapsedTimeDuration = formattedElapsedTime;
 
-  const styleSection = clsx("border", "border-slate-400", "rounded", "w-full");
+  const styleSection = clsx("w-full");
 
   const styleTitle = clsx(
     "text-2xl",
@@ -43,31 +44,35 @@ export const TotalTimes: FC<{ timeSum: number; remainTime: number }> = ({
 
   return (
     <section className={styleSection}>
-      <h2 className={styleTitle}>合計</h2>
+      <Card>
+        <h2 className={styleTitle}>合計</h2>
 
-      <div className={styleTable}>
-        <Table>
-          <TBody>
-            <Tr>
-              <Td className={styleRemainTitle}>残り時間</Td>
-              <Td className={styleRemainTime}>
-                <time dateTime={remainTimeDuration}>{formattedRemainTime}</time>
-                秒
-              </Td>
-            </Tr>
+        <div className={styleTable}>
+          <Table>
+            <TBody>
+              <Tr>
+                <Td className={styleRemainTitle}>残り時間</Td>
+                <Td className={styleRemainTime}>
+                  <time dateTime={remainTimeDuration}>
+                    {formattedRemainTime}
+                  </time>
+                  秒
+                </Td>
+              </Tr>
 
-            <Tr>
-              <Td className={styleElapsedTitle}>経過時間</Td>
-              <Td className={styleElapsedTime}>
-                <time dateTime={elapsedTimeDuration}>
-                  {formattedElapsedTime}
-                </time>
-                秒
-              </Td>
-            </Tr>
-          </TBody>
-        </Table>
-      </div>
+              <Tr>
+                <Td className={styleElapsedTitle}>経過時間</Td>
+                <Td className={styleElapsedTime}>
+                  <time dateTime={elapsedTimeDuration}>
+                    {formattedElapsedTime}
+                  </time>
+                  秒
+                </Td>
+              </Tr>
+            </TBody>
+          </Table>
+        </div>
+      </Card>
     </section>
   );
 };

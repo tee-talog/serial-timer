@@ -34,9 +34,9 @@ export const TotalTimes: FC<{ timeSum: number; remainTime: number }> = ({
     "border-slate-400",
   );
 
-  const styleTable = clsx("p-4", "pt-2");
+  const styleTable = clsx("p-4");
 
-  const styleRemainTitle = clsx("text-4xl", "leading-[1.6]");
+  const styleRemainTitle = clsx("text-4xl");
   const styleRemainTime = clsx("text-4xl", "text-right");
 
   const styleElapsedTitle = clsx("text-xl");

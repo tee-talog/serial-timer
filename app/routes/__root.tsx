@@ -9,25 +9,6 @@ import type { ReactNode } from "react";
 // @ts-ignore
 import css from "../index.css?url";
 
-export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      {
-        charSet: "utf-8",
-      },
-      {
-        name: "viewport",
-        content: "width=device-width, initial-scale=1",
-      },
-      {
-        title: "TanStack Start Starter",
-      },
-    ],
-    links: [{ rel: "stylesheet", href: css }],
-  }),
-  component: RootComponent,
-});
-
 function RootComponent() {
   return (
     <RootDocument>
@@ -50,3 +31,29 @@ function RootDocument({ children }: Readonly<{ children: ReactNode }>) {
     </html>
   );
 }
+
+const NotFoundComponent = () => (
+  <RootDocument>
+    <p>Not Found</p>
+  </RootDocument>
+);
+
+export const Route = createRootRoute({
+  head: () => ({
+    meta: [
+      {
+        charSet: "utf-8",
+      },
+      {
+        name: "viewport",
+        content: "width=device-width, initial-scale=1",
+      },
+      {
+        title: "TanStack Start Starter",
+      },
+    ],
+    links: [{ rel: "stylesheet", href: css }],
+  }),
+  component: RootComponent,
+  notFoundComponent: NotFoundComponent,
+});

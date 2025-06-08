@@ -4,61 +4,44 @@ import { TBody } from "./uis/TBody";
 import { Td } from "./uis/Td";
 import { Tr } from "./uis/Tr";
 
-export const IndividualTimes: FC<{
-  currentTime: number | null;
-  currentRemainTime: number | null;
-}> = ({ currentTime, currentRemainTime }) => {
-  if (currentTime === null || currentRemainTime === null) {
-    return (
-      <Table>
-        <TBody>
-          <Tr>
-            <Td>現在のタイマーの経過時間</Td>
-            <Td>-</Td>
-          </Tr>
-
-          <Tr>
-            <Td>現在のタイマーの残り時間</Td>
-            <Td>-</Td>
-          </Tr>
-        </TBody>
-      </Table>
-    );
+const Time: FC<{ second?: number | null }> = ({ second }) => {
+  if (second === undefined || second === null) {
+    return <>-</>;
   }
 
   // TODO
-  const formattedCurrentRemainTime = `${currentRemainTime}`;
+  const formatted = `${second}`;
   // TODO
-  const currentRemainTimeDuration = formattedCurrentRemainTime;
+  const duration = formatted;
 
-  // 現在のタイマーの経過時間
-  const currentElapsedTime = currentTime - currentRemainTime;
-  // TODO
-  const formattedCurrentElapsedTime = `${currentElapsedTime}`;
-  // TODO
-  const currentElapsedTimeDuration = formattedCurrentElapsedTime;
-
-  return (
-    <Table>
-      <TBody>
-        <Tr>
-          <Td>現在のタイマーの経過時間</Td>
-          <Td>
-            <time dateTime={currentElapsedTimeDuration}>
-              {formattedCurrentElapsedTime}
-            </time>
-          </Td>
-        </Tr>
-
-        <Tr>
-          <Td>現在のタイマーの残り時間</Td>
-          <Td>
-            <time dateTime={currentRemainTimeDuration}>
-              {formattedCurrentRemainTime}
-            </time>
-          </Td>
-        </Tr>
-      </TBody>
-    </Table>
-  );
+  return <time dateTime={duration}>{formatted}</time>;
 };
+
+export const IndividualTimes: FC<{
+  currentTime: number | null;
+  currentRemainTime: number | null;
+}> = ({ currentTime, currentRemainTime }) => (
+  <Table>
+    <TBody>
+      <Tr>
+        <Td>現在のタイマーの経過時間</Td>
+        <Td>
+          <Time
+            second={
+              currentTime != null && currentRemainTime != null
+                ? currentTime - currentRemainTime
+                : null
+            }
+          />
+        </Td>
+      </Tr>
+
+      <Tr>
+        <Td>現在のタイマーの残り時間</Td>
+        <Td>
+          <Time second={currentRemainTime} />
+        </Td>
+      </Tr>
+    </TBody>
+  </Table>
+);

@@ -39,10 +39,6 @@ export const useRenTimer = () => {
       return;
     }
 
-    // TODO バグ：pause して start すると時間が戻る
-    // 止めた時間を持っておく必要がありそう
-    setTime(0);
-
     timerRef.current = window.setInterval(() => {
       setTime((t) => (t ?? 0) + 1);
     }, 1000);

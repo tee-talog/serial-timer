@@ -22,22 +22,30 @@ const Time: FC<{ second?: number | null }> = ({ second }) => {
 export const IndividualTimes: FC<{
   currentTime: number | null;
   currentRemainTime: number | null;
-}> = ({ currentTime, currentRemainTime }) => {
+  index: number | null;
+  timersLength: number;
+}> = ({ currentTime, currentRemainTime, index, timersLength }) => {
   const styleSection = clsx("w-full");
-  const styleTitle = clsx(
-    "text-xl",
+  const styleHeader = clsx(
     "p-4",
     "py-2",
     "border-b",
     "border-slate-400",
+    "flex",
+    "justify-between",
+    "items-center",
   );
+  const styleTitle = clsx("text-xl");
   const styleTable = clsx("p-4");
   const styleTimeCell = clsx("text-right");
 
   return (
     <section className={styleSection}>
       <Card>
-        <h2 className={styleTitle}>現在のタイマー</h2>
+        <div className={styleHeader}>
+          <h2 className={styleTitle}>現在</h2>
+          {index !== null && `${index + 1}個目 / ${timersLength}個中`}
+        </div>
 
         <div className={styleTable}>
           <Table>

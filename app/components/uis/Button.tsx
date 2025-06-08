@@ -13,6 +13,7 @@ export const Button: FC<Props> = ({ className, size, ...props }) => {
     "border-2",
     "border-slate-500",
     "rounded-[0.25em]",
+    "bg-white",
   );
 
   const bigStyle = clsx("text-xl", "px-4", "py-2");

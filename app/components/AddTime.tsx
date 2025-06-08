@@ -6,7 +6,7 @@ import clsx from "clsx";
 export const AddTime: FC<{
   addTimer: (num: number) => void;
 }> = ({ addTimer }) => {
-  const formStyle = clsx("flex", "gap-x-2");
+  const formStyle = clsx("flex", "items-center", "gap-x-2");
 
   const [num, setNum] = useState(0);
 
@@ -23,7 +23,7 @@ export const AddTime: FC<{
         value={num}
         onChange={(e) => setNum(Number(e.currentTarget.value))}
       />
-      <Button type="submit">add</Button>
+      秒<Button type="submit">タイマーを追加</Button>
     </form>
   );
 };

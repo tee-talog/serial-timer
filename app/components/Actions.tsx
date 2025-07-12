@@ -21,10 +21,10 @@ export const Actions: FC<{
         スタート
       </Button>
       <Button type="button" size="big" onClick={onPause}>
-        停止
+        一時停止
       </Button>
       <Button type="button" size="big" onClick={onStop}>
-        最初から
+        リセット
       </Button>
     </div>
   );

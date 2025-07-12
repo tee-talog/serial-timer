@@ -1,13 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useRenTimer } from "../hooks/useTimer";
 import { Actions } from "../components/Actions";
-import { IndividualTimes } from "../components/IndividualTimes";
-import { TotalTimes } from "../components/TotalTimes";
 import { Header } from "../components/uis/Header";
 import { AppLayout } from "../components/layouts/AppLayout";
 import { PageLayout } from "../components/layouts/PageLayout";
 import { HeaderLayout } from "../components/layouts/HeaderLayout";
 import { Intervals } from "../components/Intervals";
+import { Times } from "../components/Times";
 
 const RouteComponent = () => {
   const {
@@ -44,8 +43,9 @@ const RouteComponent = () => {
       </HeaderLayout>
 
       <PageLayout>
-        <TotalTimes remainTime={remainTime} timeSum={timeSum} />
-        <IndividualTimes
+        <Times
+          remainTime={remainTime}
+          timeSum={timeSum}
           currentRemainTime={currentRemainTime}
           currentTime={currentTimer?.time ?? null}
           index={index}

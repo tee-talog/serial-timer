@@ -39,12 +39,13 @@ export const useRenTimer = () => {
       return;
     }
 
+    setTime(time ?? 0);
     setTimerId(
       window.setInterval(() => {
         setTime((t) => (t ?? 0) + 1);
       }, 1000),
     );
-  }, [timerId]);
+  }, [time, timerId]);
 
   // タイマーを止める
   const pause = useCallback(() => {
@@ -56,11 +57,11 @@ export const useRenTimer = () => {
   const reset = useCallback(() => {
     window.clearInterval(timerId);
     setTimerId(undefined);
-    setTime(0);
+    setTime(null);
   }, [timerId]);
 
-  // 開始しているか
-  const isStarted = timerId !== undefined;
+  // 開始済みか
+  const isStarted = time !== null;
 
   // 残りの時間
   const remainTime = timeSum - (time ?? 0);

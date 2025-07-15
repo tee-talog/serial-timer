@@ -1,1 +1,39 @@
 @import "tailwindcss";
+
+:root {
+  --current-padding-y: 0;
+  --current-padding-x: 0;
+}
+
+@utility p-c-* {
+  --current-padding-y: calc(var(--spacing) * --value(integer));
+  --current-padding-x: calc(var(--spacing) * --value(integer));
+  padding: var(--current-padding-y) var(--current-padding-x);
+}
+
+@utility py-c-* {
+  --current-padding-y: calc(var(--spacing) * --value(integer));
+  padding-top: var(--current-padding-y);
+  padding-bottom: var(--current-padding-y);
+}
+
+@utility px-c-* {
+  --current-padding-x: calc(var(--spacing) * --value(integer));
+  padding-right: var(--current-padding-x);
+  padding-left: var(--current-padding-x);
+}
+
+@utility m-negative {
+  margin: calc(-1 * var(--current-padding-y))
+    calc(-1 * var(--current-padding-x));
+}
+
+@utility my-negative {
+  margin-top: calc(-1 * var(--current-padding-y));
+  margin-bottom: calc(-1 * var(--current-padding-y));
+}
+
+@utility mx-negative {
+  margin-right: calc(-1 * var(--current-padding-x));
+  margin-left: calc(-1 * var(--current-padding-x));
+}

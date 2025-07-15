@@ -34,8 +34,8 @@ export const Times: FC<{
     "border-b",
     "border-slate-400",
   );
-  const styleTable = clsx("p-4");
-  const styleSpacer = clsx("py-2");
+  const styleTable = clsx("p-c-4");
+  const styleSpacer = clsx("mx-negative", "py-2");
 
   return (
     <section className={styleSection}>
@@ -43,14 +43,15 @@ export const Times: FC<{
         <h2 className={styleTitle}>時間</h2>
 
         <div className={styleTable}>
-          <Table>
+          <Table className="w-stretch">
             <TBody>
               <RemainTotal remainTime={remainTime} />
               <ElapsedTotal timeSum={timeSum} remainTime={remainTime} />
 
               <Tr>
-                {/* TODO Hr */}
-                <Td className={styleSpacer} />
+                <Td className={styleSpacer} colSpan={999}>
+                  <div className="w-stretch border-t border-slate-400 mx-negative" />
+                </Td>
               </Tr>
 
               <CurrentRunning index={index} timersLength={timersLength} />

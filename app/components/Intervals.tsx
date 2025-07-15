@@ -15,7 +15,7 @@ type Props = {
 export const Intervals: FC<Props> = ({ addTimer, index, timers, onRemove }) => {
   const styleSection = clsx("w-full");
   const styleHeader = clsx(
-    "p-4",
+    "px-4",
     "py-3",
     "border-b",
     "border-slate-400",
@@ -25,6 +25,7 @@ export const Intervals: FC<Props> = ({ addTimer, index, timers, onRemove }) => {
   );
   const styleTitle = clsx("text-xl");
   const styleBody = clsx("flex", "flex-col");
+  const styleNoTimer = clsx("p-4");
 
   return (
     <section className={styleSection}>
@@ -35,7 +36,7 @@ export const Intervals: FC<Props> = ({ addTimer, index, timers, onRemove }) => {
         </div>
 
         {timers.length === 0 ? (
-          <>ありません</>
+          <div className={styleNoTimer}>ありません</div>
         ) : (
           <div className={styleBody}>
             <IntervalList index={index} timers={timers} onRemove={onRemove} />

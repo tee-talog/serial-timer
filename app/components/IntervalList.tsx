@@ -14,7 +14,6 @@ export const IntervalList: FC<{
     "w-full",
     "grid",
     "gap-x-4",
-    "p-4",
     css`
       grid-template-columns: max-content 1fr max-content;
     `,
@@ -24,8 +23,8 @@ export const IntervalList: FC<{
     "grid",
     "grid-cols-subgrid",
     "col-span-3",
-    "py-2",
-    "pl-2",
+    "py-3",
+    "px-4",
     // 下線
     "not-last:border-b-1",
     "not-last:border-slate-300",

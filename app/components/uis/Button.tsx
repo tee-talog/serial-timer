@@ -1,5 +1,7 @@
 import clsx from "clsx";
 import type { ComponentProps, FC } from "react";
+import { tv } from "tailwind-variants";
+import { twMerge } from "tailwind-merge";
 
 type Props = ComponentProps<"button"> & {
   size?: "big";
@@ -16,21 +18,21 @@ export const Button: FC<Props> = ({ className, size, ...props }) => {
     "bg-white",
   );
 
-  const bigStyle = clsx("text-xl", "px-4", "py-2");
-
   const hoverStyle = clsx("hover:bg-slate-100", "cursor-pointer");
   const activeStyle = clsx("active:bg-slate-200");
 
-  return (
-    <button
-      {...props}
-      className={clsx(
-        className,
-        style,
-        hoverStyle,
-        activeStyle,
-        size === "big" && bigStyle,
-      )}
-    />
-  );
+  const variants = tv({
+    base: twMerge(style, hoverStyle, activeStyle, className),
+    variants: {
+      size: {
+        default: "",
+        big: clsx("text-xl", "px-4", "py-2"),
+      },
+    },
+    defaultVariants: {
+      size: "default",
+    },
+  });
+
+  return <button {...props} className={variants({ size })} />;
 };

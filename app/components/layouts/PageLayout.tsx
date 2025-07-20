@@ -8,6 +8,7 @@ export const PageLayout: FC<Props> = ({ className, ...props }) => {
     className,
     "row-2",
     "col-2",
+    "py-[32px]",
     "flex",
     "flex-col",
     "items-start",

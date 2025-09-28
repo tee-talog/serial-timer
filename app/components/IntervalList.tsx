@@ -8,8 +8,9 @@ import { css } from "@emotion/css";
 export const IntervalList: FC<{
   timers: Timer[];
   index: number | null;
+  canRemove: boolean;
   onRemove: (id: Uuid) => void;
-}> = ({ timers, index, onRemove }) => {
+}> = ({ timers, index, canRemove, onRemove }) => {
   const listStyle = clsx(
     "w-full",
     "grid",
@@ -49,7 +50,11 @@ export const IntervalList: FC<{
           </div>
           <div className={actionCellStyle}>
             {/* TODO アイコンボタンにする */}
-            <Button type="button" onClick={() => onRemove(t.id)}>
+            <Button
+              type="button"
+              disabled={!canRemove}
+              onClick={() => onRemove(t.id)}
+            >
               remove
             </Button>
           </div>

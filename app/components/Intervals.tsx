@@ -9,10 +9,17 @@ type Props = {
   addTimer: (time: number) => void;
   index: number | null;
   timers: Timer[];
+  canRemove: boolean;
   onRemove: (id: Uuid) => void;
 };
 
-export const Intervals: FC<Props> = ({ addTimer, index, timers, onRemove }) => {
+export const Intervals: FC<Props> = ({
+  addTimer,
+  index,
+  timers,
+  canRemove,
+  onRemove,
+}) => {
   const styleSection = clsx("w-full");
   const styleHeader = clsx(
     "px-4",
@@ -39,7 +46,12 @@ export const Intervals: FC<Props> = ({ addTimer, index, timers, onRemove }) => {
           <div className={styleNoTimer}>ありません</div>
         ) : (
           <div className={styleBody}>
-            <IntervalList index={index} timers={timers} onRemove={onRemove} />
+            <IntervalList
+              index={index}
+              timers={timers}
+              canRemove={canRemove}
+              onRemove={onRemove}
+            />
           </div>
         )}
       </Card>

@@ -68,6 +68,7 @@ const RouteComponent = () => {
           addTimer={addTimer}
           index={index}
           timers={timers}
+          canRemove={!isStarted}
           onRemove={removeTimer}
         />
       </PageLayout>

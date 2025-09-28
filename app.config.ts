@@ -13,5 +13,9 @@ export default defineConfig({
       }),
       tailwindcss(),
     ],
+    define: {
+      "globalThis.Cloudflare.compatibilityFlags":
+        "{enable_nodejs_process_v2: true}",
+    },
   },
 });

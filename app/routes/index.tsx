@@ -21,6 +21,9 @@ const RouteComponent = () => {
     timeSum,
     currentTimer,
     currentRemainTime,
+    isRunning,
+    isStarted,
+    isFinished,
   } = useRenTimer();
 
   const onStart = () => {
@@ -51,7 +54,15 @@ const RouteComponent = () => {
           index={index}
           timersLength={timers.length}
         />
-        <Actions onStart={onStart} onPause={pause} onStop={onStop} />
+
+        <Actions
+          canStart={!isFinished && !isRunning}
+          canPause={isRunning}
+          canReset={isStarted}
+          onStart={onStart}
+          onPause={pause}
+          onStop={onStop}
+        />
 
         <Intervals
           addTimer={addTimer}

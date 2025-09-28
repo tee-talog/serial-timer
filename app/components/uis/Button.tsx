@@ -7,7 +7,7 @@ type Props = ComponentProps<"button"> & {
   size?: "big";
 };
 
-export const Button: FC<Props> = ({ className, size, ...props }) => {
+export const Button: FC<Props> = ({ className, size, disabled, ...props }) => {
   const style = clsx(
     "w-max",
     "px-3",
@@ -18,15 +18,18 @@ export const Button: FC<Props> = ({ className, size, ...props }) => {
     "bg-white",
   );
 
-  const hoverStyle = clsx("hover:bg-slate-100", "cursor-pointer");
   const activeStyle = clsx("active:bg-slate-200");
 
   const variants = tv({
-    base: twMerge(style, hoverStyle, activeStyle, className),
+    base: twMerge(style, activeStyle, className),
     variants: {
       size: {
         default: "",
         big: clsx("text-xl", "px-4", "py-2"),
+      },
+      disabled: {
+        true: clsx("bg-slate-200", "cursor-not-allowed", "text-slate-500"),
+        false: clsx("hover:bg-slate-100", "cursor-pointer"),
       },
     },
     defaultVariants: {
@@ -34,5 +37,11 @@ export const Button: FC<Props> = ({ className, size, ...props }) => {
     },
   });
 
-  return <button {...props} className={variants({ size })} />;
+  return (
+    <button
+      {...props}
+      disabled={disabled}
+      className={variants({ size, disabled })}
+    />
+  );
 };

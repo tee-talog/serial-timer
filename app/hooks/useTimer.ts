@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 export type Uuid = `${string}-${string}-${string}-${string}-${string}`;
 
@@ -33,9 +33,12 @@ export const useRenTimer = () => {
   // 最初のタイマーが始まってからの時間
   const [time, setTime] = useState<number | null>(null);
 
+  // タイマーが今動いているか
+  const isRunning = timerId !== undefined;
+
   // タイマースタート
   const start = useCallback(() => {
-    if (timerId !== undefined) {
+    if (isRunning) {
       return;
     }
 
@@ -45,7 +48,7 @@ export const useRenTimer = () => {
         setTime((t) => (t ?? 0) + 1);
       }, 1000),
     );
-  }, [time, timerId]);
+  }, [time, isRunning]);
 
   // タイマーを止める
   const pause = useCallback(() => {
@@ -130,6 +133,7 @@ export const useRenTimer = () => {
     start,
     pause,
     reset,
+    isRunning,
     isStarted,
     isFinished,
     index,
